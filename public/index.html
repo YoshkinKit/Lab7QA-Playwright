@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма зворотного зв'язку</title>
+</head>
+
+<body>
+    <h1>Зв'яжіться з нами</h1>
+    <form id="contactForm">
+        <input id="name" type="text" placeholder="Ваше ім'я" required />
+        <textarea id="message" placeholder="Ваше повідомлення" required></textarea>
+        <button id="sendButton" type="submit">Відправити</button>
+    </form>
+    <p id="successMessage" style="display: none;">Ваше повідомлення відправлено</p>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('successMessage').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
