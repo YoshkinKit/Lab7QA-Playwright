@@ -38,5 +38,24 @@ jobs:
           pip install -r requirements.txt
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
-      - name: Run tests
+      # Первый запуск тестов для генерации скриншотов
+      - name: Run tests to generate snapshots
+        run: pytest || true
+
+      # Сохранение сгенерированных скриншотов как артефактов
+      - name: Upload snapshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: snapshots
+          path: testing/screenshot/snapshots/test_local_screenshots
+
+      # Загрузить сохраненные скриншоты
+      - name: Download snapshots
+        uses: actions/download-artifact@v3
+        with:
+          name: snapshots
+          path: testing/screenshot/snapshots/test_local_screenshots
+
+      # Второй запуск тестов для проверки скриншотов
+      - name: Run tests to verify snapshots
         run: pytest
